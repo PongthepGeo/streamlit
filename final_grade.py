@@ -1,9 +1,9 @@
-# Import necessary libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 import numpy as np
+import os 
 
 from scipy import stats
 from datetime import datetime
@@ -89,7 +89,6 @@ status = st.radio("ความเห็น:", ('ไม่ออกความ�
 #         'ไม่อนุมัติ': []
 #     }
 
-import os 
 
 # Read the existing log file and populate session state
 if 'status_names' not in st.session_state:
