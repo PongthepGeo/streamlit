@@ -82,12 +82,35 @@ status = st.radio("ความเห็น:", ('ไม่ออกความ�
 #     st.subheader('รายชื่อไม่อนุมัติ')
 #     st.write(', '.join(st.session_state['status_names']['ไม่อนุมัติ']))
 
+# if 'status_names' not in st.session_state:
+#     st.session_state['status_names'] = {
+#         'ไม่ออกความเห็น': [],
+#         'อนุมัติ': [],
+#         'ไม่อนุมัติ': []
+#     }
+
+import os 
+
+# Read the existing log file and populate session state
 if 'status_names' not in st.session_state:
     st.session_state['status_names'] = {
         'ไม่ออกความเห็น': [],
         'อนุมัติ': [],
         'ไม่อนุมัติ': []
     }
+
+    # Populate the state with existing data if log.txt exists
+    if os.path.isfile('log.txt'):
+        with open('log.txt', 'r') as f:
+            for line in f:
+                # Assuming log_message structure is "{timestamp}: User selected {name} and clicked {status}"
+                parts = line.split("User selected ")
+                if len(parts) >= 2:
+                    name_status_parts = parts[1].split(" and clicked ")
+                    if len(name_status_parts) == 2:
+                        name_from_file = name_status_parts[0].strip()
+                        status_from_file = name_status_parts[1].strip()
+                        st.session_state['status_names'][status_from_file].append(name_from_file)
 
 if st.button('Submit'):
     # Update the dictionary based on the user's choice
