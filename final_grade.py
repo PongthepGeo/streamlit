@@ -127,7 +127,9 @@ if st.button('Submit'):
     # Display the names
     st.subheader('รายชื่อไม่ออกความเห็น')
     st.write(', '.join(st.session_state['status_names']['ไม่ออกความเห็น']))
-    st.subheader('รายชื่ออนุมัติ')
+    num_approved = len(st.session_state['status_names']['อนุมัติ'])
+    # print(f"There are {num_approved} approved names.")
+    st.subheader(f"รายชื่ออนุมัติ {num_approved}/17")
     st.write(', '.join(st.session_state['status_names']['อนุมัติ']))
     st.subheader('รายชื่อไม่อนุมัติ')
     st.write(', '.join(st.session_state['status_names']['ไม่อนุมัติ']))
